@@ -367,6 +367,24 @@ Since the physical system memory is divided into page frames, or pages, every ph
 
 ### SYSCALL_DEFINEn
 
+The purpose of macros is to ensure that the proper compiler pragmas<sup>1</sup> are applied to the function
+
+It's syntax is:
+
+SYSCALL_DEFINEn(name_of_the_syscall, type_of_argument1, name_of_argument1, type_of_argument2, name_of_argument2, ...)
+
+<i>n stands for the number of arguments the syscall is going to receive</i>
+
+This macro generates two functions:
+
+a. SYSCALL_METADATA()
+Basic tracer to catch the syscall entry and exit events. Builds a boilerplate function to receive the arguments and match their types
+
+b. __SYSCALL_DEFINEx()
+It involves another read function and also implements several instances to validate the types of the entered arguments
+
+<i> <sup>1</sup> In computer programming, a directive or pragma (from "pragmatic") is a language construct that specifies how a compiler (or other translator) should process its input.</i>
+
 ## References
 
 * [Adding a Hello World System Call to Linux Kernel](https://medium.com/anubhav-shrimal/adding-a-hello-world-system-call-to-linux-kernel-dad32875872)
